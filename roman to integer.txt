@@ -1,0 +1,71 @@
+LeetCode Problem 13
+Converting Roman to Integer
+
+Generlized rule
+
+M = 1000   	CM 800
+D = 500		CD 300
+C = 100		XC 80
+L = 50		XL 30
+X 10		IX 8
+V= 5		IV 4
+
+
+
+
+
+#include<iostream>
+#include<conio.h>
+#include<string>
+using namespace std;
+
+int romanToInt(string s){
+	int result = 0; // to overwrite the garbage values
+	int i = -1;
+	while (s[++i])
+	{
+		if (s[i] == 'I')
+			result += 1;
+		else if (s[i] == 'V' && i != 0 && s[i-1] == 'I')
+			result += 3;
+		else if (s[i] == 'V')
+			result += 5;
+
+		else if (s[i] == 'X' && i != 0 && s[i - 1] == 'I') // IX=8
+			result += 8;
+
+		else if (s[i] == 'X') // X=10
+			result += 10;
+		else if (s[i] == 'L' && i != 0 && s[i - 1] == 'X')// XL = 30
+			result += 30;
+		else if (s[i] == 'L') // L =50
+			result += 50;
+		else if (s[i] == 'C' && i != 0 && s[i - 1] == 'X')// XC
+			result += 80;
+		else if (s[i] == 'C')
+			result += 100;
+		else if (s[i] == 'D' && i != 0 && s[i - 1] == 'C')// CD =30
+			result += 300;
+		else if (s[i] == 'D')
+			result += 500;
+		else if (s[i] == 'M' && i != 0 && s[i - 1] == 'C')// CM =800
+			result += 800;
+		else if (s[i] == 'M')
+			result + 1000;
+
+	}
+	return result;
+}
+
+int main(){
+
+	string s;
+	cout << "Please Enter a  roman number and I will convert it ot integer" << endl;
+	cin>> s;
+	int r = romanToInt(s);
+
+	cout << "The Integer equievelent to " << r; 
+
+
+	return 0;
+}
